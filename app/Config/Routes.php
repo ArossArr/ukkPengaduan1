@@ -34,8 +34,17 @@ $routes->get('/dash', 'Home::dashv');
 // login
 $routes->get('/login','LoginC::login');
 $routes->post('/plogin','LoginC::plogin');
+$routes->get('/logout','LoginC::logout');
 $routes->get('/register','LoginC::reg');
 $routes->post('/svreg','LoginC::svreg');
+// Masyarakat
+$routes->get('/masyarakat','MasyarakatC::view');
+// petugas
+$routes->get('/petugas','PetugasC::view');
+$routes->post('/spetugas','PetugasC::sv');
+// pengaduan
+$routes->get('/pengaduan','PengaduanC::view');
+$routes->post('/spengaduan','PengaduanC::sv');
 
 
 /*

@@ -41,7 +41,7 @@ class LoginC extends baseController{
           $cekptgs = $ptgs->where(['username'=>$username])->first();
           if(!($cekmasy)&&!($cekptgs))
           {
-               return redirect('login')->with('message',lang('Username dan Password Salah'));
+               return redirect('login')->with('error',lang('Username dan Password Salah'));
           } else 
           {
                if($cekmasy){
@@ -62,12 +62,12 @@ class LoginC extends baseController{
                }
                if($cekptgs)
                {
-                    dd($cekptgs);
+                    // dd($cekptgs);
                     if(password_verify($password,$cekptgs['password'])){
                          session()->set([
                               'username'=>$cekptgs['username'],
                               'id_petugas'=>$cekptgs['id_petugas'],
-                              'level'=>'level',
+                              'level'=>$cekptgs['level'],
                               'logged_in'=> true
                          ]);
                          return redirect('dash');
@@ -76,5 +76,11 @@ class LoginC extends baseController{
                     }
                }
           }
+     }
+     public function logout()
+     {
+          session()->destroy();
+          // dd('assa');
+          return redirect('login');
      }
 }

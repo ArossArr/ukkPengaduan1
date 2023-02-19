@@ -6,7 +6,7 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('layouts/admin');
+        return view('view/loginv');
     }
     public function dashv()
     {

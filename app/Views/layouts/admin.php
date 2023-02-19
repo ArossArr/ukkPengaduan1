@@ -46,7 +46,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="d-sm-flex align-items-center justify-content-between ">
                         <h1 class="h3 mb-0 text-gray-800"><?=$this->renderSection('title')?></h1>
                     </div>
                     <?=$this->renderSection('content')?>
@@ -113,11 +113,16 @@
 
     <!-- Page level plugins -->
     <script src="<?=base_url()?>/vendor/chart.js/Chart.min.js"></script>
+    
 
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>/js/demo/chart-area-demo.js"></script>
     <script src="<?=base_url()?>/js/demo/chart-pie-demo.js"></script>
+    
+    <script src="<?=base_url()?>/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="<?=base_url()?>/vendor/datatables/jquery.dataTables.min.js"></script>
 
+    <?=$this->renderSection('script')?>
 </body>
 
 </html>
