@@ -7,8 +7,9 @@
      <div class="col">
           <?php if(session('level')=='masyarakat'){
                ?>
-               <a href="#" data-pengaduan="" data-toggle="modal" data-target="#mPengaduan" class="btn btn-primary mb-3"><i class="fas  fa-file-plus"></i>Tambah Pengaduan</a>
-               <?php
+          <a href="#" data-pengaduan="" data-toggle="modal" data-target="#mPengaduan" class="btn btn-primary mb-3"><i
+                    class="fas  fa-file-plus"></i>Tambah Pengaduan</a>
+          <?php
           }?>
 
           <div class="card shadow">
@@ -25,8 +26,8 @@
                                    <th>Foto</th>
                                    <?php if(session('level')=='masyarakat'){
                                         ?>
-                                        <th>Status</th>
-                                        <?php
+                                   <th>Status</th>
+                                   <?php
                                    }?>
                                    <th>Opsi</th>
                               </tr>
@@ -42,18 +43,25 @@
                                    <td><?=$row['tgl']?></td>
                                    <td><?=$row['isi']?></td>
                                    <td><?=$row['foto']?></td>
-                                   <td>
                                    <?php if(session('level')=='masyarakat'){
                                         ?>
-                                        <td><?=$row['status']?></td>
-                                        <?php
-                                   }?>
-                                   </td>
-                                   
+                                   <td><?=$row['status']?></td>
+                                   <?php
+                                   } 
+                                   ?>
                                    <td>
-                                        <a href="" class="btn btn-success">Edit</a>
+                                        <?php if(session('level')=='masyarakat'){
+                                        ?>
                                         <a href="" class="btn btn-danger">Hapus</a>
+                                        <?php
+                                   } else {
+                                        ?>
+                                        <a href="" data-tanggapan="<?$data?>" data-toggle="modal" data-target="#mTanggapan" class="btn btn-primary">Tanggapi</a>
+                                        <?php
+                                   }
+                                   ?>
                                    </td>
+
                               </tr>
                               <?php
                               }
@@ -68,51 +76,47 @@
      </div>
 </div>
 <div class="modal fade" tabindex="-1" aria-hidden="true" id="mPengaduan">
-<div class="modal-dialog">
-     <div class="modal-content">
-          <div class="modal-header bg-gradient-primary">
-               <h5 class="text-white">Tambah Pengaduan</h5>
-          </div>
-          <div class="modal-body">
-               <form action="/spengaduan" method="post" id="fPengaduan">
-                    <div class="form-group">
-                         <label for="">Laporan : </label>
-                         <textarea name="isi" id="isi" cols="30" rows="10" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                         <label for="">Foto</label>
-                         <input type="file" name="foto" id="foto" class="form-control">
-                    </div>
-                    <div class="modal-footer">
-                         <button class="btn btn-primary"><i class="fas fa-save"></i></button>
-                    </div>
-               </form>
+     <div class="modal-dialog">
+          <div class="modal-content">
+               <div class="modal-header bg-gradient-primary">
+                    <h5 class="text-white">Tambah Pengaduan</h5>
+               </div>
+               <div class="modal-body">
+                    <form action="/spengaduan" method="post" id="fPengaduan" enctype="multipart/form-data">
+                         <div class="form-group">
+                              <label for="">Laporan : </label>
+                              <textarea name="isi" id="isi" cols="30" rows="10" class="form-control"></textarea>
+                         </div>
+                         <div class="form-group">
+                              <label for="">Foto</label>
+                              <input type="file" name="foto" id="foto" class="form-control">
+                         </div>
+                         <div class="modal-footer">
+                              <button class="btn btn-primary"><i class="fas fa-save"></i></button>
+                         </div>
+                    </form>
+               </div>
           </div>
      </div>
 </div>
+<div class="modal fade" tabindex="-1" aria-hidden="true" id="mTanggapan">
+     <div class="modal-dialog">
+          <div class="modal-content">
+               <div class="modal-header bg-gradient-primary">
+                    <h5 class="text-white">Tambah Pengaduan</h5>
+               </div>
+               <div class="modal-body">
+                    <form action="/stanggapan" method="post" id="fTanggapan" enctype="multipart/form-data">
+                         <div class="form-group">
+                              <label for="">Tanggapan : </label>
+                              <textarea name="tanggapan" id="tanggapan" cols="30" rows="10" class="form-control"></textarea>
+                         </div>
+                         <div class="modal-footer">
+                              <button class="btn btn-primary"><i class="fas fa-save"></i></button>
+                         </div>
+                    </form>
+               </div>
+          </div>
+     </div>
 </div>
-<?=$this->endSection()?>
-<?=$this->section('script')?>
-<script>
-     $(document).ready(function(){
-          $('#mPengaduan').on('show.bs.modal',function(e){
-               var button = $(e.relatedTarget);
-               var data = button.data('pengaduan');
-               if(data != "")
-               {
-                    const barisdata = data.split(",");
-                    $('#tgl').val(barisdata[0]);
-                    $('#isi').val(barisdata[1]);
-                    $('#foto').val(barisdata[2]);
-                    $('#fPengaduan').attr('action',barisdata[3]);
-               } else {
-                    $('#tgl').val("");
-                    $('#isi').val("");
-                    $('#foto').val("");
-                    $('#fPengaduan').attr('action','/spengaduan');
-               }
-          });
-          $('#pengaduan').DataTable();
-     })
-</script>
 <?=$this->endSection()?>

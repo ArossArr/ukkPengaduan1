@@ -45,6 +45,8 @@ $routes->post('/spetugas','PetugasC::sv');
 // pengaduan
 $routes->get('/pengaduan','PengaduanC::view');
 $routes->post('/spengaduan','PengaduanC::sv');
+// tanggapan
+$routes->post('/stanggapan','TanggapanC::svt');
 
 
 /*
